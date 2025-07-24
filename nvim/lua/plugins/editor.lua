@@ -114,7 +114,7 @@ return {
       user_default_options = {
         RGB = true, -- #RGB
         RRGGBB = true, -- #RRGGBB
-        names = true, -- "blue", "red", etc.
+        names = false, -- "blue", "red", etc.
         RRGGBBAA = true, -- #RRGGBBAA
         AARRGGBB = false, -- 0xAARRGGBB
         rgb_fn = true, -- rgb() and rgba()
@@ -166,3 +166,37 @@ return {
     vim.keymap.set("v", "<leader>/", function()
       local esc = vim.api.nvim_replace_termcodes("<ESC>", true, false, true)
       vim.api.nvim_feedkeys(esc, "x", false)
+      require("Comment.api").toggle.linewise(vim.fn.visualmode())
+    end, { desc = "Toggle comment on selection" }),
+
+    config = function(_, opts)
+      require("Comment").setup(opts)
+    end,
+  },
+
+  {
+    "mistweaverco/kulala.nvim",
+    ft = "http",
+    keys = {
+      { "<leader>r", "", desc = "+Rest", ft = "http" },
+      { "<leader>rb", "<cmd>lua require('kulala').scratchpad()<cr>", desc = "Open scratchpad", ft = "http" },
+      { "<leader>Rc", "<cmd>lua require('kulala').copy()<cr>", desc = "Copy as cURL", ft = "http" },
+      { "<leader>RC", "<cmd>lua require('kulala').from_curl()<cr>", desc = "Paste from curl", ft = "http" },
+      {
+        "<leader>rg",
+        "<cmd>lua require('kulala').download_graphql_schema()<cr>",
+        desc = "Download GraphQL schema",
+        ft = "http",
+      },
+      { "<leader>ri", "<cmd>lua require('kulala').inspect()<cr>", desc = "Inspect current request", ft = "http" },
+      { "<leader>rn", "<cmd>lua require('kulala').jump_next()<cr>", desc = "Jump to next request", ft = "http" },
+      { "<leader>rp", "<cmd>lua require('kulala').jump_prev()<cr>", desc = "Jump to previous request", ft = "http" },
+      { "<leader>rq", "<cmd>lua require('kulala').close()<cr>", desc = "Close window", ft = "http" },
+      { "<leader>rr", "<cmd>lua require('kulala').replay()<cr>", desc = "Replay the last request", ft = "http" },
+      { "<leader>rs", "<cmd>lua require('kulala').run()<cr>", desc = "Send the request", ft = "http" },
+      { "<leader>rS", "<cmd>lua require('kulala').show_stats()<cr>", desc = "Show stats", ft = "http" },
+      { "<leader>rt", "<cmd>lua require('kulala').toggle_view()<cr>", desc = "Toggle headers/body", ft = "http" },
+    },
+    opts = {},
+  },
+}
