@@ -1,4 +1,18 @@
 return {
+  {
+    "nomnivore/ollama.nvim",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    cmd = { "Ollama", "OllamaChat", "OllamaModel" },
+    keys = {
+      { "<leader>oo", "<cmd>Ollama<cr>", desc = "Ollama Prompt (current file or selection)" },
+      { "<leader>oc", "<cmd>OllamaChat<cr>", desc = "Ollama Chat Session" },
+      { "<leader>om", "<cmd>OllamaModel<cr>", desc = "Select Ollama Model" },
+    },
+    opts = {
+      model = "mistral", -- set your default model
+      url = "http://localhost:11434", -- Ollama's default local URL
+    },
+  },
 
   {
     "nvim-telescope/telescope.nvim",
@@ -17,11 +31,11 @@ return {
         "nvim-tree/nvim-web-devicons",
         enabled = vim.g.have_nerd_font,
       },
-      { "nvim-telescope/telescope-file-browser.nvim" }, -- [ADDED] file_browser extension
+      { "nvim-telescope/telescope-file-browser.nvim" },
     },
     config = function()
       local telescope = require("telescope")
-      local fb_actions = require("telescope._extensions.file_browser.actions") -- [ADDED] fb_actions
+      local fb_actions = require("telescope._extensions.file_browser.actions")
       local builtin = require("telescope.builtin")
 
       telescope.setup({
@@ -199,4 +213,69 @@ return {
     },
     opts = {},
   },
+
+  {
+    "ThePrimeagen/harpoon",
+    opts = {},
+    keys = function()
+      local harpoon = require("harpoon")
+      local keys = {
+        {
+          "<leader>H",
+          function()
+            harpoon:list():add()
+          end,
+          desc = "Harpoon File",
+        },
+        {
+          "<leader>h",
+          function()
+            harpoon.ui:toggle_quick_menu(harpoon:list())
+          end,
+          desc = "Harpoon Quick Menu",
+        },
+        {
+          "<leader>hn",
+          function()
+            harpoon:list():next()
+          end,
+          desc = "Harpoon Next File",
+        },
+        {
+          "<leader>hp",
+          function()
+            harpoon:list():prev()
+          end,
+          desc = "Harpoon Previous File",
+        },
+        {
+          "<leader>ra",
+          function()
+            require("harpoon"):list():clear()
+          end,
+          desc = "Remove All Harpoon Files",
+        },
+        {
+          "<leader>r",
+          function()
+            harpoon:list():remove()
+          end,
+          desc = "Remove File from Harpoon",
+        },
+      }
+
+      for i = 1, 6 do
+        table.insert(keys, {
+          "<leader>" .. i,
+          function()
+            harpoon:list():select(i)
+          end,
+          desc = "Harpoon to File " .. i,
+        })
+      end
+
+      return keys
+    end,
+  },
 }
+
