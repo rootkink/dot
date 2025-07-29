@@ -1,20 +1,5 @@
 return {
   {
-    "nomnivore/ollama.nvim",
-    dependencies = { "nvim-lua/plenary.nvim" },
-    cmd = { "Ollama", "OllamaChat", "OllamaModel" },
-    keys = {
-      { "<leader>oo", "<cmd>Ollama<cr>", desc = "Ollama Prompt (current file or selection)" },
-      { "<leader>oc", "<cmd>OllamaChat<cr>", desc = "Ollama Chat Session" },
-      { "<leader>om", "<cmd>OllamaModel<cr>", desc = "Select Ollama Model" },
-    },
-    opts = {
-      model = "mistral", -- set your default model
-      url = "http://localhost:11434", -- Ollama's default local URL
-    },
-  },
-
-  {
     "nvim-telescope/telescope.nvim",
     event = "VimEnter",
     dependencies = {
