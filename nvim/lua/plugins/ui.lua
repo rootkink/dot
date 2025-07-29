@@ -1,5 +1,21 @@
 return {
   {
+    "folke/tokyonight.nvim",
+    opts = {
+      transparent = true,
+      styles = {
+        sidebars = "transparent",
+        floats = "transparent",
+      },
+      on_highlights = function(hl, colors)
+        hl.WinSeparator = {
+          fg = "#FFFFFF",
+          bg = "NONE",
+        }
+      end,
+    },
+  },
+  {
     "folke/noice.nvim",
     opts = function(_, opts)
       -- Base configuration
@@ -115,3 +131,4 @@ return {
     },
   },
 }
+
