@@ -4,10 +4,6 @@ local opts = { noremap = true, silent = true }
 -- ╭──────────────────────────────────────────────╮
 -- │ Insert Mode                                  │
 -- ╰──────────────────────────────────────────────╯
-keymap("i", "<C-o>", "<C-r>0", vim.tbl_extend("force", opts, { desc = "Paste last yanked text" }))
-keymap("i", "<C-y>", '<C-o>"+yy', vim.tbl_extend("force", opts, { desc = "Yank current line to clipboard" }))
-keymap("i", "<C-ff>", '<C-r>=expand("%:p")<CR>', vim.tbl_extend("force", opts, { desc = "Insert full file path" }))
-keymap("i", "<C-d>", '<C-r>=strftime("%Y-%m-%d")<CR>', vim.tbl_extend("force", opts, { desc = "Insert current date" }))
 keymap("i", "<C-f>", "<C-o>gUiw", vim.tbl_extend("force", opts, { desc = "Capitalize word" }))
 -- ╭──────────────────────────────────────────────╮
 -- │ Clipboard, Yank, Delete, Paste               │
@@ -21,9 +17,6 @@ keymap("v", "<leader>d", '"_d', vim.tbl_extend("force", opts, { desc = "Delete s
 keymap("n", "db", '"vb_d', vim.tbl_extend("force", opts, { desc = "Delete delete a word backward" }))
 
 keymap("v", "p", '"_dP', vim.tbl_extend("force", opts, { desc = "Paste without yanking" }))
-
-
-
 -- ╭──────────────────────────────────────────────╮
 -- │ Navigation & Scrolling                       │
 -- ╰──────────────────────────────────────────────╯
@@ -91,12 +84,6 @@ keymap("n", "bq", ":bd<CR>", vim.tbl_extend("force", opts, { desc = "Close buffe
 keymap("n", "qa", ":qa<CR>", vim.tbl_extend("force", opts, { desc = "Close all buffers" }))
 keymap("n", "bp", ":bprevious<CR>", vim.tbl_extend("force", opts, { desc = "Previous buffer" }))
 keymap("n", "bn", ":bnext<CR>", vim.tbl_extend("force", opts, { desc = "Next buffer" }))
--- ╭──────────────────────────────────────────────╮
--- │ Toggles                                      │
--- ╰──────────────────────────────────────────────╯
-keymap("n", "<leader>rn", function()
-  vim.o.relativenumber = not vim.o.relativenumber
-end, vim.tbl_extend("force", opts, { desc = "Toggle relative number" }))
 
 -- ╭──────────────────────────────────────────────╮
 -- │ Search                                       │
